@@ -1,6 +1,8 @@
-package Data::Sah::Coerce::perl::str::str_to_ean13;
+package Data::Sah::Coerce::perl::To_str::From_str::to_ean8;
 
+# AUTHOR
 # DATE
+# DIST
 # VERSION
 
 use 5.010001;
@@ -10,6 +12,7 @@ use warnings;
 sub meta {
     +{
         v => 4,
+        summary => 'Check and format EAN-8 number from string',
         might_fail => 1,
         prio => 50,
     };
@@ -30,7 +33,7 @@ sub coerce {
         "do { my \$digits = $dt; \$digits =~ s/[^0-9]//g; ",
         "my \$res; ",
         "{ ",
-        "  if (length \$digits != 13) { \$res = ['EAN-13 must have 13 digits']; last } ",
+        "  if (length \$digits != 8) { \$res = ['EAN-8 must have 8 digits']; last } ",
         "  unless (Algorithm::CheckDigits::CheckDigits('ean')->is_valid(\$digits)) { \$res = ['Invalid checksum digit']; last } ",
         "  \$res = [undef, \$digits]; ",
         "} ",
@@ -41,12 +44,6 @@ sub coerce {
 }
 
 1;
-# ABSTRACT: Check and format EAN-13 number from string
+# ABSTRACT:
 
 =for Pod::Coverage ^(meta|coerce)$
-
-=head1 DESCRIPTION
-
-The rule is not enabled by default. You can enable it in a schema using e.g.:
-
- ["str", "x.perl.coerce_rules"=>["str_to_ean13"]]
