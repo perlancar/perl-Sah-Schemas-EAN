@@ -13,7 +13,7 @@ Checksum digit must be valid.
 
 _
     match => '\A[0-9]{13}\z',
-    'x.perl.coerce_rules' => ['str_to_ean13'],
+    'x.perl.coerce_rules' => ['From_str::to_ean13'],
 }, {}];
 
 1;
